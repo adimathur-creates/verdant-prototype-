@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verdant — Recovery Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">V</div>
+      <div>
+        <strong>Verdant</strong>
+        <span>Recovery Ops</span>
+      </div>
+    </div>
+    <nav id="primary-nav">
+      <button class="nav-item active" data-view="dashboard"><span class="nav-icon">◆</span> Dashboard</button>
+      <button class="nav-item" data-view="exceptions"><span class="nav-icon">!</span> Exceptions <span class="nav-count">12</span></button>
+      <button class="nav-item" data-view="accounts"><span class="nav-icon">≡</span> Accounts</button>
+      <button class="nav-item" data-view="client"><span class="nav-icon">▢</span> Client View</button>
+    </nav>
+    <div class="sidebar-note">
+      <span class="eyebrow">This Quarter</span>
+      <p>Recovery rate up 6.4 pts after the auto-retry policy shipped on May 12.</p>
+      <a class="case-study-link" href="#" data-toast="Case study coming soon.">Read the case study →</a>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- DASHBOARD VIEW -->
+    <section class="view active" data-view="dashboard">
+      <div class="topbar">
+        <div>
+          <span class="eyebrow">Operations Overview</span>
+          <h1>Good morning, Aditya</h1>
+          <p class="page-subtitle">12 accounts need a human today. The rest are progressing on schedule.</p>
+        </div>
+        <div class="topbar-actions">
+          <div class="as-of"><span class="pulse"></span> Updated 2 min ago</div>
+          <button class="secondary-button" data-toast="Export queued. You'll get the CSV by email.">Export</button>
+          <button class="primary-button" data-nav="exceptions">Review queue</button>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card accent">
+          <div class="metric-label">Recovered this month</div>
+          <div class="metric-value">$1.84M</div>
+          <div class="metric-note">+12.3% vs. last month</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Recovery rate (30-day)</div>
+          <div class="metric-value">72.4%</div>
+          <div class="metric-note">Target 70%</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Open exceptions</div>
+          <div class="metric-value">12</div>
+          <div class="metric-note bad">3 aged &gt; 48h</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Avg. time to resolve</div>
+          <div class="metric-value">4.2h</div>
+          <div class="metric-note">Down from 6.8h</div>
+        </div>
+      </div>
+
+      <div class="insight-strip">
+        <div>
+          <span class="eyebrow">Today's Recommendation</span>
+          <h2>Move 4 accounts to soft-recovery before 5pm</h2>
+          <p>These accounts hit their second missed retry overnight. Acting today avoids a 14% drop in recovery odds.</p>
+        </div>
+        <button class="primary-button" data-nav="exceptions">Open the 4 accounts</button>
+      </div>
+
+      <div class="two-column">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <span class="eyebrow">Needs attention</span>
+              <h2>Top exceptions by value</h2>
+            </div>
+            <button class="text-button" data-nav="exceptions">See all 12 →</button>
+          </div>
+          <div class="exception-list" id="exception-list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <span class="eyebrow">Lifecycle</span>
+              <h2>Where accounts are stuck</h2>
+            </div>
+            <button class="text-button" data-toast="Detailed view coming soon.">Details →</button>
+          </div>
+          <div class="lifecycle-chart">
+            <div class="lifecycle-row">
+              <div class="lifecycle-label"><strong>Auto-retry</strong><span>184 accounts · 62%</span></div>
+              <div class="bar"><div class="bar-fill" style="width:62%"></div></div>
+            </div>
+            <div class="lifecycle-row">
+              <div class="lifecycle-label"><strong>Soft outreach</strong><span>61 accounts · 21%</span></div>
+              <div class="bar"><div class="bar-fill" style="width:21%"></div></div>
+            </div>
+            <div class="lifecycle-row">
+              <div class="lifecycle-label"><strong>Negotiation</strong><span>32 accounts · 11%</span></div>
+              <div class="bar"><div class="bar-fill" style="width:11%"></div></div>
+            </div>
+            <div class="lifecycle-row">
+              <div class="lifecycle-label"><strong>Legal hold</strong><span>18 accounts · 6%</span></div>
+              <div class="bar"><div class="bar-fill" style="width:6%"></div></div>
+            </div>
+          </div>
+          <div class="guardrail-box">
+            <div class="guardrail-icon">✓</div>
+            <div>
+              <strong>Guardrail healthy</strong>
+              <p>No account has skipped a required notice. Last audit: 2 hours ago.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXCEPTIONS VIEW -->
+    <section class="view" data-view="exceptions">
+      <div class="topbar">
+        <div>
+          <span class="eyebrow">Queue</span>
+          <h1>Exceptions</h1>
+          <p class="page-subtitle">12 accounts flagged for review. Sorted by recovery risk.</p>
+        </div>
+        <div class="topbar-actions">
+          <button class="secondary-button" data-toast="Assignment rules updated.">Assign rules</button>
+          <button class="primary-button" data-toast="Bulk action sent to 4 accounts.">Batch action (4)</button>
+        </div>
+      </div>
+
+      <div class="view-toolbar">
+        <div class="filter-group" id="filter-group">
+          <button class="filter-chip active" data-filter="all">All (12)</button>
+          <button class="filter-chip" data-filter="p0">P0 (3)</button>
+          <button class="filter-chip" data-filter="p1">P1 (6)</button>
+          <button class="filter-chip" data-filter="p2">P2 (3)</button>
+        </div>
+        <div class="search">
+          <span>⌕</span>
+          <input id="exception-search" placeholder="Search account, ID, or owner…" />
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Priority</th><th>Account</th><th>Amount</th><th>Stage</th><th>Aging</th><th>Owner</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="exception-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCOUNTS VIEW -->
+    <section class="view" data-view="accounts">
+      <div class="topbar">
+        <div>
+          <span class="eyebrow">Portfolio</span>
+          <h1>Accounts</h1>
+          <p class="page-subtitle">All active recovery accounts across stages.</p>
+        </div>
+        <div class="topbar-actions">
+          <button class="secondary-button" data-toast="Filter saved.">Save filter</button>
+          <button class="primary-button" data-toast="Import started.">Import</button>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card"><div class="metric-label">Active accounts</div><div class="metric-value">295</div><div class="metric-note">+18 this week</div></div>
+        <div class="metric-card"><div class="metric-label">Total balance</div><div class="metric-value">$8.4M</div><div class="metric-note">Across 4 portfolios</div></div>
+        <div class="metric-card"><div class="metric-label">In auto-retry</div><div class="metric-value">184</div><div class="metric-note">62% of book</div></div>
+        <div class="metric-card"><div class="metric-label">Avg. balance</div><div class="metric-value">$28.5K</div><div class="metric-note">Stable</div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div><span class="eyebrow">All accounts</span><h2>Sorted by balance</h2></div>
+          <button class="text-button" data-toast="Column settings opened.">Columns</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Account</th><th>Balance</th><th>Stage</th><th>Status</th><th>Last contact</th><th></th></tr>
+            </thead>
+            <tbody id="accounts-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENT VIEW -->
+    <section class="view" data-view="client">
+      <div class="topbar">
+        <div>
+          <span class="eyebrow">Borrower Experience</span>
+          <h1>What the client sees</h1>
+          <p class="page-subtitle">Preview the mobile experience across recovery stages.</p>
+        </div>
+      </div>
+
+      <div class="client-demo">
+        <div class="client-demo-copy">
+          <span class="eyebrow">Live Preview</span>
+          <h2>Calm, honest, useful.</h2>
+          <p>Every email, SMS, and in-app screen we send is anchored in a single principle: the borrower should always know exactly where they stand and what to do next.</p>
+          <label for="state-select">Choose a stage</label>
+          <select id="state-select">
+            <option value="autopay">Auto-retry scheduled</option>
+            <option value="soft">Soft outreach</option>
+            <option value="plan">Repayment plan offered</option>
+          </select>
+          <div class="state-explanation" id="state-explanation">
+            When auto-retry is scheduled, the borrower sees the amount, the next attempt date, and a single line of plain English about what happens if the retry fails. No legal jargon, no upsell.
+          </div>
+        </div>
+        <div class="phone-shell">
+          <div class="phone-top"><span>9:41</span><span>●●● 5G</span></div>
+          <div class="phone-content" id="phone-content"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Drawer -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="order-drawer" id="order-drawer" aria-hidden="true">
+    <button class="drawer-close" id="drawer-close" aria-label="Close">×</button>
+    <span class="eyebrow">Account detail</span>
+    <h2 class="drawer-title" id="drawer-title">Account #ACC-00021</h2>
+    <p class="drawer-subtitle" id="drawer-subtitle">Maya Iyer · Tier 2 portfolio</p>
+
+    <div class="drawer-callout">
+      <strong>Recommended next step</strong>
+      <p id="drawer-recommendation">Move to soft outreach. Two auto-retries have failed and the borrower opened the last two emails but didn't click through.</p>
+    </div>
+
+    <div class="drawer-grid">
+      <div class="drawer-field"><span>Balance</span><strong id="drawer-balance">$24,800</strong></div>
+      <div class="drawer-field"><span>Stage</span><strong id="drawer-stage">Auto-retry</strong></div>
+      <div class="drawer-field"><span>Days past due</span><strong id="drawer-dpd">14</strong></div>
+      <div class="drawer-field"><span>Last contact</span><strong id="drawer-contact">2 days ago</strong></div>
+    </div>
+
+    <div class="drawer-section">
+      <h3>Timeline</h3>
+      <div class="timeline">
+        <div class="timeline-item"><strong>Auto-retry attempt #2 failed</strong><span>Today, 06:14</span></div>
+        <div class="timeline-item"><strong>Reminder email opened</strong><span>Yesterday, 19:32</span></div>
+        <div class="timeline-item"><strong>Auto-retry attempt #1 failed</strong><span>Jun 1, 06:11</span></div>
+        <div class="timeline-item"><strong>Account flagged for review</strong><span>May 30, 14:02</span></div>
+      </div>
+    </div>
+
+    <div class="drawer-actions">
+      <button class="primary-button" data-toast="Moved to soft outreach. Borrower will get an SMS within 2 hours.">Move to soft outreach</button>
+      <button class="secondary-button" data-toast="Snoozed for 24h.">Snooze 24h</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast">Done.</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
